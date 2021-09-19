@@ -31,7 +31,7 @@ Patient.create(name: "Elli Emergency")
 Patient.create(name: "Norma Mom")
 Patient.create(name: "Thomas Gom")
 
-43.times do |i|
+222.times do |i|
   Appointment.create(datetime: Faker::Time.between_dates(from: DateTime.now, to: DateTime.now + 43), doctor_id:rand(1..8), patient_id:rand(1..9))
 end
 
