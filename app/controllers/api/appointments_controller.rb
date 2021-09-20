@@ -3,7 +3,7 @@ class Api::AppointmentsController < ApplicationController
   before_action :set_appointment, only: [:show, :update, :destroy]
 
   def index
-    appointments = Appointment.slow_loader
+    appointments = Appointment.plus
     render json: appointments
   end
 
