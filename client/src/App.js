@@ -1,9 +1,9 @@
-import logo from './logo.svg';
 import './App.css';
 import NavBar from "./components/NavBar";
 import { Route, Switch } from "react-router";
 import { Container } from "semantic-ui-react"
 import { routes } from "./pages/routes"
+import ViewAppointment from './pages/ViewAppointment';
 
 
 function App() {
@@ -18,7 +18,8 @@ function App() {
       <Container>
         <Switch>
           {renderRoutes()}
-          <Route component={() => <b> React Router 404, Path Not Found </b> } />
+          {/* <Route component={() => <b> React Router 404, Path Not Found </b> } /> */}
+          <Route exact path={`/appointments/:id/`} component={ ViewAppointment } />
         </Switch>
       </Container>
    </>

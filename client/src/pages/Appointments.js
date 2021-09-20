@@ -4,16 +4,21 @@ import { Button, Card, CardContent, CardHeader, Header, Table } from "semantic-u
 import SimpleLoader from "../components/SimpleLoader";
 import SimpleError from "../components/SimpleError";
 import { Link } from "react-router-dom";
+import useAxiosOnMount from "../components/useAxiosOnMount";
+import ViewAppointment from "./ViewAppointment";
+import { Switch, Route } from "react-router-dom"
 
 const Appointments = () => {
-  const [appointments, setAppointments] = useState ([]);
-  const [loading, setLoading] = useState (true)
-  const [error, setError] = useState(null);
+const { data: appointments, loading, error } = useAxiosOnMount("/api/appointments")
 
-  useEffect (() => {
-    getAppointments();
-  }, [] 
-  );
+  // const [appointments, setAppointments] = useState ([]);
+  // const [loading, setLoading] = useState (true)
+  // const [error, setError] = useState(null);
+
+  // useEffect (() => {
+  //   getAppointments();
+  // }, [] 
+  // );
 
   const renderAppointments = () => {
     if (loading) return <SimpleLoader />
@@ -34,8 +39,9 @@ const Appointments = () => {
         <Table.Cell>{a.patient.phone}</Table.Cell>
         <Table.Cell>{a.datetime}</Table.Cell>
         <Table.Cell>
-          <Link to={`/Appointments/${a.id}`}>
-          <Button>
+          <Link to={`/appointments/${a.id}`}>
+            <Button>
+
             View Appointment
           </Button>
           </Link>
@@ -44,21 +50,24 @@ const Appointments = () => {
         )})}
 
           //want to make table sortable and filterable goddangit//
-      const getAppointments = async () => {
-      try {
-        setError(null)
-        let res = await axios.get("/api/appointments")
-        console.log(res.data)
-        setAppointments(res.data)
-      }
-      catch (error) {
-        setError(error)
-        }
-      finally {
-        setLoading(false)
-      }
-    };
-    
+
+
+          //not necessary useAxiosOnMount
+    //   const getAppointments = async () => {
+    //   try {
+    //     setError(null)
+    //     let res = await axios.get("/api/appointments")
+    //     console.log(res.data)
+    //     setAppointments(res.data)
+    //   }
+    //   catch (error) {
+    //     setError(error)
+    //     }
+    //   finally {
+    //     setLoading(false)
+    //   }
+    // };
+          //not necessary useAxiosOnMount
 
   return (
     <div>

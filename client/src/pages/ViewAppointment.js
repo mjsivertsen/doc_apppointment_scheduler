@@ -1,23 +1,41 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { Button, Card, Image } from "semantic-ui-react";
+import {  Card  } from "semantic-ui-react";
+import useAxiosOnMount from "../components/useAxiosOnMount";
+import SimpleLoader from "../components/SimpleLoader";
+import SimpleError from "../components/SimpleError";
 
-const ViewAppointment = (props) => {
-    return (
-      <div key={a.id}>
-      <Card>
-      <CardContent>
-        <CardHeader>{`Appointment with ${a.doctor.name}`}</CardHeader>
-        <Card.Meta>{a.doctor.address}</Card.Meta>
-        <Card.Meta>{a.doctor.phone}</Card.Meta>
-        <Card.Description>{`${a.patient.name}, you have an appointment scheduled with ${a.doctor.name} for ${a.datetime}`}</Card.Description>
-        </CardContent>
-        <CardContent extra>
-        <Card.Meta> Please arrive at least fifteen seconds before your appointment time. </Card.Meta> 
-          <Button> View Appointment </Button>
-        </CardContent>
-      </Card>
-      </div>
-    )}
+const ViewAppointment = () => {
+const { data: appointment, loading, error } = useAxiosOnMount("/api/appointments/#{params.id}")
+
+  const renderAppointment = () => {
+    if (loading) return <SimpleLoader />
+    if (error)
+      return (
+        <SimpleError
+        header={"Well that didn't work."}
+        error={error} />
+      )
+      return (
+        <div key={appointment.id}>
+        <Card>
+        <Card.Content>
+          <Card.Header>APPOINTMENT</Card.Header>
+          <Card.Meta>{appointment.doctor.address}</Card.Meta>
+          <Card.Meta>{appointment.doctor.phone}</Card.Meta>
+          <Card.Description>{`Appointment scheduled with ${appointment.doctor.name} for and ${appointment.patient.name} for ${appointment.datetime}`}</Card.Description>
+          </Card.Content>
+          <Card.Content extra>
+          <Card.Meta> Please arrive at least fifteen seconds before your appointment time. </Card.Meta> 
+          </Card.Content>
+        </Card>
+        </div>
+      )}
+
+  return (
+    <>
+    {renderAppointment()}
+    </>
+  )
+  }
 
   export default ViewAppointment

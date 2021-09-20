@@ -10,7 +10,7 @@ renderRoutes = () => {
     return routes.map(({ pathname, title }) => {
         return(
             <Link to={pathname}>
-                <Menu.Item active={location.pathname == pathname}>
+                <Menu.Item active={location.pathname === pathname}>
                   {title}
                 </Menu.Item>
             </Link>
