@@ -3,7 +3,7 @@ import React from "react";
 const AddPatient = () => {
   return (
     <>
-    Home
+    Add Patient
     </>
   )
 }

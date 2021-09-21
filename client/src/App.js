@@ -18,8 +18,6 @@ function App() {
       <Container>
         <Switch>
           {renderRoutes()}
-          {/* <Route component={() => <b> React Router 404, Path Not Found </b> } /> */}
-          <Route exact path={`/appointments/:id/`} component={ ViewAppointment } />
         </Switch>
       </Container>
    </>

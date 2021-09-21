@@ -31,23 +31,26 @@ const { data: appointments, loading, error } = useAxiosOnMount("/api/appointment
     if (appointments.length === 0) {
       return <p> No appointments scheduled.</p>
     }
-     return appointments.map( (a) => {
-        return (
-      <Table.Row key="a.id">
-        <Table.Cell>{a.doctor.name}</Table.Cell>
-        <Table.Cell>{a.patient.name}</Table.Cell>
-        <Table.Cell>{a.patient.phone}</Table.Cell>
-        <Table.Cell>{a.datetime}</Table.Cell>
-        <Table.Cell>
-          <Link to={`/appointments/${a.id}`}>
-            <Button>
-
-            View Appointment
-          </Button>
-          </Link>
-        </Table.Cell>
-      </Table.Row>
-        )})}
+    return appointments.map( (a) => {
+      return (
+    <Table.Row key="a.id">
+      <Table.Cell>{a.doctor.name}</Table.Cell>
+      <Table.Cell>{a.patient.name}</Table.Cell>
+      <Table.Cell>{a.patient.phone}</Table.Cell>
+      <Table.Cell>{a.datetime}</Table.Cell>
+      <Table.Cell>
+        <Link to={`/appointments/${a.id}`}>
+          <Button >
+          <Switch>
+          <Route exact path={`/appointments/:id/`} component={ ViewAppointment } />
+          </Switch>
+          View Appointment
+        </Button>
+        </Link>
+      </Table.Cell>
+    </Table.Row>
+      )})
+    }
 
           //want to make table sortable and filterable goddangit//
 
